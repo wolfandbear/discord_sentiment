@@ -1,3 +1,5 @@
+#receive data and write to a PostgreSQL db
+
 from flask import Flask, request
 import os
 import sqlite3
@@ -8,9 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 cur_dir = os.path.dirname(__file__)
-db = os.path.join(cur_dir, 'discord_log.sqlite')
-
-
 
 def pg_entry(event):
     try:
@@ -54,8 +53,6 @@ def index():
     data = json.loads(data)
 
     print(incoming_event)
-    #print(**incoming_event)
-    #sqlite_entry(db, incoming_event)
     pg_entry(incoming_event)
     return {'message': 'success'}
 
