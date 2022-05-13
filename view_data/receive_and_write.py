@@ -15,7 +15,7 @@ def pg_entry(event):
     try:
         conn = psycopg2.connect(user = os.getenv('USER'),
                                 password = os.getenv('PASSWORD'),
-                                host = os.getenv('LOCALHOST'),
+                                host = os.getenv('HOST'),
                                 port = os.getenv('PORT'),
                                 database = os.getenv('DB')
                                 )
