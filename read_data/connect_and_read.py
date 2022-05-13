@@ -64,24 +64,27 @@ if __name__=='__main__':
 
     while True:
         event = receive_json_response(ws)
-
         try:
-            guild_id = event['d']['guild_id']
-            channel_id = event['d']['channel_id']
-            timestamp = event['d']['timestamp']
-            username = event['d']['author']['username']
-            content = event['d']['content']
 
-            #post request to the flask app
-            print(guild_id, channel_id, timestamp, username, content)
-            record = {'guild_id':int(guild_id), 'channel_id':int(channel_id), 'time':str(timestamp)}
-            r = requests.post(os.getenv(LOG_URL), json=record)
-            print('server response: ', r)
-
-            op_code = event('op')
+            op_code = event['op']
             if op_code == 11:
                 print('heartbeat received')
 
-        except:
-            print('exception')
+            print('***************')
+            if (event.get('d', {}).get('guild_id')):
+
+                guild_id = event['d']['guild_id']
+                channel_id = event['d']['channel_id']
+                timestamp = event['d']['timestamp']
+                username = event['d']['author']['username']
+                content = event['d']['content']
+
+                #post request to the flask app
+                print(guild_id, channel_id, timestamp, username, content)
+                record = {'guild_id':int(guild_id), 'channel_id':int(channel_id), 'time':str(timestamp)}
+                r = requests.post(os.getenv('LOG_URL'), json=record)
+                print('server response: ', r)
+
+        except Exception as error:
+            print('exception', error)
             pass
