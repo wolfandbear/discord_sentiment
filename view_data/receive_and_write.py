@@ -27,7 +27,7 @@ def pg_entry(event):
         print(data)
 
         #insert data
-        cursor.execute("INSERT into teststats(guild_id, channel_id, time) VALUES (%s, %s, %s)", data)
+        cursor.execute("INSERT into victorsTable(guild_id, channel_id, time) VALUES (%s, %s, %s)", data)
 
         print("inserted successfully...")
 
