@@ -1,5 +1,6 @@
 # discord_sentiment
 discord bot - chat analytics and sentiment analysis
+
 Python/Flask
 
 This project aims to stream real-time chat data from discord and perform live analytics (number of posts per minute, sentiment, etc)
