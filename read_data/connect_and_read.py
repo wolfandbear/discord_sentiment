@@ -34,6 +34,12 @@ def heartbeat(interval, ws):
         print("heartbeat sent")
 
 
+def safe_get():
+    try:
+        val = event['d']['guild_id']
+    except KeyError:
+            return None
+    return val
 
 if __name__=='__main__':
     print('starting local read discord server : ', os.getenv('SERVER_NAME'))
@@ -70,8 +76,7 @@ if __name__=='__main__':
             if op_code == 11:
                 print('heartbeat received')
 
-            print('***************')
-            if (event.get('d', {}).get('guild_id')):
+            if safe_get():
 
                 guild_id = event['d']['guild_id']
                 channel_id = event['d']['channel_id']
